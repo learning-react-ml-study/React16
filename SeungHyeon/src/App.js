@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { createPortal } from 'react-dom';
 
 // 1. 여러가지 엘리먼트 return 가능!
 
@@ -40,14 +41,32 @@ class StringReturn extends Component{
   }
 }
 
+//엘리먼트가 아닌 포털을 리턴함
+// 포털은 리액트 안에 (X) ReactDOM 안에 (O)
+class Portals extends Component{
+  render(){
+      return createPortal(
+        <Message />,
+        //마운트할 위치를 포털에게 알려주어야 함.
+        document.getElementById("touchme")
+      );
+  }
+}
+const Message = () => "Just touched it!";
+
 class App extends Component {
   render() {
     return (
       <Fragment>
         <StringReturn />
+        <Portals />
       </Fragment>
     );
   }
 }
+
+
+
+
 
 export default App;

@@ -31,3 +31,44 @@
 - 다른 파일에 있는 것들을 관리하고 싶다면?
     Error Boundary Component에 랩핑된 컴포넌트를 export.
     ex. export default BoundaryHOC(App);
+
+
+## this setStateNull
+
+- setStateNull : 컴포넌트를 언제 업데이트할지 컨트롤 가능. 
+    - null 리턴 -> update X, trigger a re-render X
+    - 예시 두 가지
+     1. const eatPizza = (state, porps) => {
+     const {pizzas} = state;
+     return {
+         null
+         };
+    };
+ 
+    _handleClick = () => {
+        this.setState(eatPizza);
+    }
+
+    or
+
+    2. 
+    const eatPizza = (state, props) => {
+    const {pizzas} = state;
+    return {
+        pizzas: pizzas + 1
+    };
+    
+    _handleClick = () => {
+        this.setState({
+            pizzas: null
+        });
+    };
+
+
+- setState function (ex. eatPizza)를 밖으로 내보낼 수 있음
+
+## 참고하기
+
+[React v16.0 - React 공식 블로그](https://reactjs.org/blog/2017/09/26/react-v16.0.html)
+
+
